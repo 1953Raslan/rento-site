@@ -1,37 +1,67 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>معرض السيارات - RENTO</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Arial', sans-serif; background: #f8f8f8; margin: 0; }
+    header { background-color: #222; color: white; padding: 20px; text-align: center; }
+    nav { background-color: #444; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .gallery-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: auto; }
+    .car-card { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; transition: 0.3s; }
+    .car-card img { width: 100%; height: 180px; object-fit: cover; }
+    .car-card .info { padding: 15px; }
+    .car-card .info h3 { margin: 0 0 10px; color: #e65c00; }
+    .car-card .info p { margin: 5px 0; color: #555; }
+  </style>
 </head>
 <body>
-  <h1>معرض السيارات</h1>
-  <div class="gallery-grid">
-    <p>جاري تحميل السيارات...</p>
-  </div>
+  <header>
+    <h1>معرض سيارات RENTO</h1>
+  </header>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="about.html">من نحن</a>
+    <a href="booking.html">حجز</a>
+    <a href="gallery.html">المعرض</a>
+    <a href="testimonials.html">آراء العملاء</a>
+    <a href="mailto:Wael19848@gmail.com">تواصل معنا</a>
+  </nav>
+  <div class="gallery-container" id="gallery"></div>
+
   <script>
-    fetch("https://script.google.com/macros/s/AKfycbxVdv5L2Pt_MKD2Z84wGZAj1kFXY7lNUnIlmw7_lYDbO74P7pBRoSo0htOZbe82m_LZ/exec")
-      .then(res => res.json())
-      .then(data => {
-        const container = document.querySelector(".gallery-grid");
-        container.innerHTML = "";
-        data.forEach(car => {
-          const card = document.createElement("div");
-          card.className = "car-card";
+    const sheetID = "1YpUMF0-H-iXy5stpK6Sc7QWEoemzlbUwXhQagt4N5BU";
+    const base = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?sheet=Cars`;
+
+    fetch(base)
+      .then(res => res.text())
+      .then(rep => {
+        const jsonData = JSON.parse(rep.substring(47).slice(0, -2));
+        const data = jsonData.table.rows;
+        const gallery = document.getElementById('gallery');
+
+        data.forEach(row => {
+          const model = row.c[0]?.v || "-";
+          const price = row.c[1]?.v || "-";
+          const status = row.c[2]?.v || "-";
+          const image = row.c[3]?.v || "https://via.placeholder.com/300x200?text=No+Image";
+
+          const card = document.createElement('div');
+          card.className = 'car-card';
           card.innerHTML = `
-            <img src="${car["رابط الصورة"]}" alt="${car["الموديل"]}" style="width:100%; max-height:200px; object-fit:cover">
-            <h3>${car["الموديل"]}</h3>
-            <p>${car["السعر"]}</p>
-            <p>${car["الحالة"]}</p>
+            <img src="${image}" alt="${model}" />
+            <div class="info">
+              <h3>${model}</h3>
+              <p>السعر: ${price}</p>
+              <p>الحالة: ${status}</p>
+            </div>
           `;
-          container.appendChild(card);
+          gallery.appendChild(card);
         });
-      })
-      .catch(err => {
-        document.querySelector(".gallery-grid").innerHTML = "<p>خطأ في تحميل البيانات.</p>";
-        console.error(err);
       });
   </script>
 </body>
