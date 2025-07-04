@@ -1,1 +1,83 @@
-<!DOCTYPE html><html lang='ar' dir='rtl'><head><meta charset='UTF-8'><title>الحجز - RENTO</title><link rel='stylesheet' href='style.css'></head><body><h1>نموذج الحجز</h1></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حجز سيارة - RENTO</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Arial', sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; }
+    header { background-color: #222; color: white; padding: 20px; text-align: center; }
+    nav { background-color: #444; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .form-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    h2 { text-align: center; color: #e65c00; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #e65c00;
+      color: white;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      font-size: 1.1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d45500;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>نموذج حجز سيارة</h1>
+  </header>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="about.html">من نحن</a>
+    <a href="booking.html">حجز</a>
+    <a href="gallery.html">المعرض</a>
+    <a href="testimonials.html">آراء العملاء</a>
+    <a href="mailto:Wael19848@gmail.com">تواصل معنا</a>
+  </nav>
+
+  <div class="form-container">
+    <h2>أدخل بياناتك</h2>
+    <form name="rento-booking" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="rento-booking">
+
+      <label>الاسم الكامل:</label>
+      <input type="text" name="الاسم" required>
+
+      <label>رقم الهاتف:</label>
+      <input type="tel" name="الهاتف" required>
+
+      <label>نوع السيارة المطلوبة:</label>
+      <input type="text" name="نوع السيارة" required>
+
+      <label>تاريخ البداية:</label>
+      <input type="date" name="تاريخ البداية" required>
+
+      <label>تاريخ النهاية:</label>
+      <input type="date" name="تاريخ النهاية" required>
+
+      <label>ملاحظات إضافية:</label>
+      <textarea name="ملاحظات" rows="4"></textarea>
+
+      <button type="submit">إرسال الحجز</button>
+    </form>
+  </div>
+</body>
+</html>
