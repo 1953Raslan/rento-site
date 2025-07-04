@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>معرض السيارات - RENTO</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>معرض السيارات</h1>
+  <div class="gallery-grid">
+    <p>جاري تحميل السيارات...</p>
+  </div>
+  <script>
+    fetch("https://script.google.com/macros/s/AKfycbxVdv5L2Pt_MKD2Z84wGZAj1kFXY7lNUnIlmw7_lYDbO74P7pBRoSo0htOZbe82m_LZ/exec")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.querySelector(".gallery-grid");
+        container.innerHTML = "";
+        data.forEach(car => {
+          const card = document.createElement("div");
+          card.className = "car-card";
+          card.innerHTML = `
+            <img src="${car["رابط الصورة"]}" alt="${car["الموديل"]}" style="width:100%; max-height:200px; object-fit:cover">
+            <h3>${car["الموديل"]}</h3>
+            <p>${car["السعر"]}</p>
+            <p>${car["الحالة"]}</p>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        document.querySelector(".gallery-grid").innerHTML = "<p>خطأ في تحميل البيانات.</p>";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
