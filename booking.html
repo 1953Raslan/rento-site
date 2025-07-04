@@ -5,91 +5,80 @@
   <title>نموذج حجز سيارة</title>
   <style>
     body {
-      font-family: Arial;
-      background: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+      background-color: #f6f6f6;
       text-align: center;
-      padding: 30px;
+      padding: 50px;
     }
     form {
-      max-width: 500px;
-      margin: auto;
-      background: white;
-      padding: 20px;
+      background-color: #fff;
+      padding: 30px;
       border-radius: 10px;
+      display: inline-block;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     input, select, textarea {
+      display: block;
       width: 100%;
+      margin-bottom: 15px;
       padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      text-align: right;
+      font-size: 16px;
     }
     button {
-      background: #ff5500;
+      background-color: #ff5500;
       color: white;
-      padding: 12px;
-      width: 100%;
       border: none;
-      border-radius: 5px;
-      margin-top: 15px;
+      padding: 12px 25px;
       font-size: 16px;
+      border-radius: 5px;
       cursor: pointer;
     }
     .message {
-      margin-top: 15px;
-      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+      color: red;
     }
   </style>
 </head>
 <body>
 
   <h2>نموذج حجز سيارة</h2>
+
   <form id="bookingForm">
     <input type="text" name="name" placeholder="الاسم الكامل" required>
     <input type="tel" name="phone" placeholder="رقم الهاتف" required>
     <select name="car" required>
-      <option value="" disabled selected>اختر نوع السيارة</option>
+      <option value="">اختر نوع السيارة</option>
       <option value="Toyota">Toyota</option>
       <option value="Hyundai">Hyundai</option>
       <option value="Kia">Kia</option>
     </select>
-    <label>تاريخ البدء</label>
     <input type="date" name="start" required>
-    <label>تاريخ الانتهاء</label>
     <input type="date" name="end" required>
     <textarea name="notes" placeholder="ملاحظات إضافية (اختياري)"></textarea>
     <button type="submit">إرسال</button>
-    <div class="message" id="msg"></div>
   </form>
 
+  <div class="message" id="responseMsg"></div>
+
   <script>
-    document.getElementById("bookingForm").addEventListener("submit", async function(e) {
+    document.getElementById("bookingForm").addEventListener("submit", function (e) {
       e.preventDefault();
       const form = e.target;
-      const data = new FormData(form);
-      const msg = document.getElementById("msg");
+      const formData = new FormData(form);
 
-      try {
-        const res = await fetch("https://script.google.com/macros/s/AKfycbx5jlQAYS0wQhCyqwP2j09Iy3VHfdeRpCvsjR113i9_kkvw3eCtIxvtXTOqtJ4t1Vjk/exec", {
-          method: "POST",
-          body: data
-        });
-
-        const text = await res.text();
-        if (text.trim() === "success") {
-          msg.textContent = "✅ تم إرسال الحجز بنجاح!";
-          msg.style.color = "green";
-          form.reset();
-        } else {
-          msg.textContent = "❌ حدث خطأ يرجى المحاولة لاحقاً.";
-          msg.style.color = "red";
-        }
-      } catch (error) {
-        msg.textContent = "❌ فشل الاتصال بالخادم.";
-        msg.style.color = "red";
-      }
+      fetch("https://script.google.com/macros/s/AKfycbwzybSTcIK4-HfAnmCg28dEUbGggA-OQYj9cTUPZ9DampGVZJJnY5S0hJXrHoqnfNo_/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("responseMsg").innerHTML = "✅ تم إرسال الحجز بنجاح!";
+        form.reset();
+      })
+      .catch(err => {
+        document.getElementById("responseMsg").innerHTML = "❌ فشل الاتصال بالخادم. حاول مرة أخرى.";
+      });
     });
   </script>
 
