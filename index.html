@@ -1,1 +1,84 @@
-<!DOCTYPE html><html lang='ar' dir='rtl'><head><meta charset='UTF-8'><title>الرئيسية - RENTO</title><link rel='stylesheet' href='style.css'></head><body><h1>مرحبا بك في RENTO</h1></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RENTÖ | الصفحة الرئيسية</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-image: url('https://images.unsplash.com/photo-1605557891167-98768b44398e');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    nav {
+      background-color: #222;
+      color: white;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      font-size: 1.1em;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .cta-button {
+      background-color: #ff6600;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2em;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .cta-button:hover {
+      background-color: #e65c00;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="about.html">من نحن</a>
+    <a href="booking.html">حجز</a>
+    <a href="gallery.html">المعرض</a>
+    <a href="testimonials.html">آراء العملاء</a>
+    <a href="mailto:Wael19848@gmail.com">تواصل معنا</a>
+  </nav>
+
+  <header>
+    <h1>مرحباً بك في RENTO لتأجير السيارات</h1>
+    <button class="cta-button" onclick="location.href='booking.html'">احجز الآن</button>
+  </header>
+</body>
+</html>
