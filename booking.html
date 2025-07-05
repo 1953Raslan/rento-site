@@ -1,73 +1,68 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>نموذج حجز سيارة</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #f4f4f4;
+      font-family: Arial;
+      text-align: center;
       padding: 20px;
-      direction: rtl;
+      background: #f9f9f9;
     }
     form {
+      background: #fff;
+      padding: 20px;
       max-width: 400px;
       margin: auto;
-      background: white;
-      padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    input, select, textarea, button {
+    input, select, textarea {
       width: 100%;
-      margin: 10px 0;
       padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
+      margin: 8px 0;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
     button {
-      background: orange;
+      background-color: #ff5500;
       color: white;
-      font-weight: bold;
-      cursor: pointer;
       border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    .msg {
-      text-align: center;
-      margin-top: 10px;
-      color: red;
+    #responseMsg {
+      margin-top: 15px;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <h2 style="text-align: center;">نموذج حجز سيارة</h2>
+  <h2>نموذج حجز سيارة</h2>
 
   <form id="bookingForm">
-    <input type="text" name="name" placeholder="الاسم الكامل" required />
-    <input type="tel" name="phone" placeholder="رقم الهاتف" required />
+    <input type="text" name="name" placeholder="الاسم الكامل" required>
+    <input type="tel" name="phone" placeholder="رقم الهاتف" required>
     
     <select name="car" required>
-      <option value="">اختر السيارة</option>
+      <option value="">اختر نوع السيارة</option>
       <option value="Toyota">Toyota</option>
       <option value="Hyundai">Hyundai</option>
       <option value="Kia">Kia</option>
     </select>
 
-    <label>تاريخ البدء</label>
-    <input type="date" name="start" required />
-    
-    <label>تاريخ الانتهاء</label>
-    <input type="date" name="end" required />
-    
+    <input type="date" name="start" required>
+    <input type="date" name="end" required>
+
     <textarea name="notes" placeholder="ملاحظات إضافية (اختياري)"></textarea>
 
     <button type="submit">إرسال</button>
-    <div id="responseMsg" class="msg"></div>
   </form>
+
+  <div id="responseMsg"></div>
 
   <script>
     const form = document.getElementById("bookingForm");
@@ -82,7 +77,7 @@
       })
       .then(res => res.text())
       .then(data => {
-        document.getElementById("responseMsg").innerHTML = "✅ تم إرسال الحجز بنجاح!";
+        document.getElementById("responseMsg").innerHTML = "✅ تم إرسال الحجز بنجاح";
         form.reset();
       })
       .catch(err => {
