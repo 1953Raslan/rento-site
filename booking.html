@@ -89,24 +89,23 @@
   <script>
     document.getElementById("bookingForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-
       const form = e.target;
       const formData = new FormData(form);
 
       try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbz_q4uuzY8BPwkUKZ8-RfIWA2vrUqElxAYCEAJMbnlbNxGgyKSvJufFG18-z_Yq_lyQ/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbx5FqpMwVWUcN3R3RYyjq4GqECVXK_aN3GOG7l1tkCsfEaeX0jDuf3SAmQdrMpYw0jG/exec", {
           method: "POST",
           body: formData,
         });
 
         if (response.ok) {
-          alert("تم إرسال الحجز بنجاح!");
+          alert("✅ تم إرسال الحجز بنجاح!");
           form.reset();
         } else {
-          alert("فشل الإرسال. حاول مرة أخرى.");
+          alert("❌ فشل الإرسال. حاول مرة أخرى.");
         }
       } catch (error) {
-        alert("حدث خطأ أثناء الاتصال بالخادم.");
+        alert("⚠️ حدث خطأ أثناء الاتصال بالخادم.");
         console.error(error);
       }
     });
